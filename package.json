@@ -1,0 +1,18 @@
+﻿{
+  "name": "de.domi2803.unity-toolkit",
+  "displayName": "Dome's Unity Toolkit",
+  "version": "1.0.0",
+  "unity": "2022.3",
+  "description": "Stuff I use in my projects",
+  "keywords": [
+    "unity",
+    "unity3d",
+    "upm",
+    "toolkit"
+  ],
+  "author": {
+    "name": "Domi2803"
+  },
+  "dependencies": {
+  }
+}
