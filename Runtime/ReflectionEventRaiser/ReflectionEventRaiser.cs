@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,14 +11,23 @@ namespace DomesUnityToolkit.ReflectionEventRaiser
     {
         private T _previousValue;
 
+        #if ODIN_INSPECTOR
+        [PropertyOrder(-2)]
+        [Title("Settings")]
+        #endif
         public UnityEngine.Object target;
 
-        public UnityEvent onValueChanged;
-
-        #if ODIN_INSPECTOR
+#if ODIN_INSPECTOR
         [Sirenix.OdinInspector.ValueDropdown("GetValidValueNames")]
+        [PropertyOrder(-1)]
         #endif
         public string valueName;
+
+#if ODIN_INSPECTOR
+        [PropertyOrder(0)]
+        [Title("Events")]
+#endif
+        public UnityEvent<T> onValueChanged;
 
         private void Start()
         {
@@ -47,7 +57,12 @@ namespace DomesUnityToolkit.ReflectionEventRaiser
 
             _previousValue = value;
 
-            onValueChanged.Invoke();
+            onValueChanged.Invoke(value);
+        }
+
+        internal virtual void RaiseEvent(T value)
+        {
+            onValueChanged.Invoke(value);
         }
 
         private string[] GetValidValueNames()
