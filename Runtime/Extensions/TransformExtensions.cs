@@ -27,5 +27,28 @@ namespace DomesUnityToolkit.Extensions
 
             return null;
         }
+
+        public static void DestroyChildren(this Transform parent)
+        {
+            foreach (Transform child in parent)
+            {
+                Object.Destroy(child.gameObject);
+            }
+        }
+
+        public static void DestroyChildrenEditor(this Transform parent)
+        {
+            foreach (Transform child in parent)
+            {
+                if (Application.isPlaying)
+                {
+                    Object.Destroy(child.gameObject);
+                }
+                else
+                {
+                    Object.DestroyImmediate(child.gameObject);
+                }
+            }
+        }
     }
 }

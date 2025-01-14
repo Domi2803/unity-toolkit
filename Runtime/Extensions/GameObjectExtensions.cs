@@ -45,6 +45,12 @@ namespace DomesUnityToolkit.Extensions {
             return false;
         }
 
+        public static bool TryGetComponentInChildren<T>(this GameObject gameObject, out T component) where T : Component
+        {
+            component = gameObject.GetComponentInChildren<T>();
+            return component != null;
+        }
+
         public static bool HasComponent<T>(this GameObject gameObject) where T : Component
         {
             return gameObject.TryGetComponent<T>(out _);
